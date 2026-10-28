@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf8f3">
+  <title>Quick Recipes</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #fbf8f3;
+      --surface: #ffffff;
+      --text: #29251f;
+      --muted: #706a61;
+      --border: #e7e0d6;
+      --accent: #b93625;
+      --accent-dark: #922719;
+      --easy-bg: #e8f2e5;
+      --easy-text: #356338;
+      --hard-bg: #fbe9e2;
+      --hard-text: #a23925;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button, input { touch-action: manipulation; }
+    button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 32px;
+      padding-block: 16px;
+    }
+    .brand {
+      padding: 0;
+      min-height: 44px;
+      border: 0;
+      background: none;
+      color: var(--accent);
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -1px;
+    }
+    .search-wrap { position: relative; width: 100%; }
+    .search-icon {
+      position: absolute;
+      top: 16px;
+      left: 17px;
+      width: 15px;
+      height: 15px;
+      border: 2px solid var(--muted);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      width: 7px;
+      height: 2px;
+      background: var(--muted);
+      transform: rotate(45deg);
+      right: -5px;
+      bottom: -3px;
+    }
+    #search {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 15px 12px 46px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 16px;
+    }
+    #search::placeholder { color: var(--muted); opacity: 1; }
+    main { padding-block: 28px 64px; }
+    .intro { margin-bottom: 24px; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -1.3px;
+      overflow-wrap: anywhere;
+    }
+    .intro p { margin: 0; color: var(--muted); font-size: 17px; }
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 5px 4px 13px;
+      margin-inline: -4px;
+      scrollbar-width: thin;
+      scrollbar-color: #cfc5b8 transparent;
+    }
+    .chip {
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 9px 18px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: white; }
+    .results-count { margin: 12px 0 20px; font-size: 14px; color: var(--muted); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    .card {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+    .card-open {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      color: inherit;
+    }
+    .card-open:focus-visible { outline-offset: -4px; border-radius: 18px; }
+    .photo {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      background: #eee6da;
+      color: #756c5e;
+    }
+    .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .photo-fallback { padding: 24px; font-size: 14px; text-align: center; }
+    .card-body { display: block; padding: 19px 20px 21px; }
+    .card-title {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 750;
+      letter-spacing: -.4px;
+      overflow-wrap: anywhere;
+    }
+    .metadata { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 14px; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 7px; font-size: 12px; font-weight: 750; }
+    .badge.easy { background: var(--easy-bg); color: var(--easy-text); }
+    .badge.hard { background: var(--hard-bg); color: var(--hard-text); }
+    .favorite {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid #e8e0d5;
+      border-radius: 50%;
+      background: var(--surface);
+      color: #91867a;
+      box-shadow: 0 2px 5px #29251f0d;
+    }
+    .favorite[aria-pressed="true"] { color: var(--accent); background: #fff5ef; }
+    .heart {
+      position: relative;
+      display: block;
+      width: 12px;
+      height: 12px;
+      margin-top: 5px;
+      background: currentColor;
+      transform: rotate(-45deg);
+      border-radius: 1px;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: currentColor;
+      border-radius: 50%;
+    }
+    .heart::before { top: -6px; left: 0; }
+    .heart::after { top: 0; left: 6px; }
+    .empty {
+      padding: 56px 20px;
+      text-align: center;
+      border: 1px dashed #d8ccbe;
+      border-radius: 18px;
+    }
+    .empty h2 { margin: 0 0 8px; font-size: 23px; letter-spacing: -.5px; }
+    .empty p { margin: 0 0 24px; color: var(--muted); }
+    .action {
+      min-height: 46px;
+      padding: 11px 19px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 650;
+    }
+    .action.primary { background: var(--accent); border-color: var(--accent); color: white; }
+    .detail { max-width: 860px; margin-inline: auto; }
+    .detail-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+    .detail-save { display: flex; align-items: center; gap: 12px; }
+    .detail-save .heart { transform: rotate(-45deg) scale(.8); margin-inline: 4px; }
+    .detail-save[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+    .detail-photo { border-radius: 18px; aspect-ratio: 16 / 9; margin-bottom: 26px; }
+    .detail .metadata { margin-top: 16px; font-size: 16px; }
+    .detail .badge { font-size: 13px; }
+    .recipe-content { display: grid; gap: 30px; margin-top: 36px; }
+    .recipe-content h2 { margin: 0 0 18px; font-size: 24px; letter-spacing: -.5px; }
+    .ingredients { list-style: none; padding: 0; margin: 0; }
+    .ingredients li { padding: 12px 0; border-bottom: 1px solid var(--border); overflow-wrap: anywhere; }
+    .ingredients li:first-child { padding-top: 0; }
+    .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps li { position: relative; padding-left: 44px; margin-bottom: 24px; min-height: 32px; counter-increment: step; overflow-wrap: anywhere; }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: -2px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #f4e3d9;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 750;
+    }
+    .credit { margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @media (min-width: 560px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .header-inner { flex-wrap: nowrap; padding-block: 20px; }
+      .brand { white-space: nowrap; }
+      .search-wrap { max-width: 520px; margin-left: auto; }
+      main { padding-top: 36px; }
+    }
+    @media (min-width: 880px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .recipe-content { grid-template-columns: 1fr 1.6fr; gap: 56px; }
+    }
+    @media (hover: hover) {
+      .chip:not([aria-pressed="true"]):hover, .action:not(.primary):hover { background: #f3ece3; }
+      .primary:hover { background: var(--accent-dark); }
+      .card:hover { border-color: #cbbbA8; }
+      .favorite:hover { background: #fff0e7; color: var(--accent); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      button { transition: background-color .15s, border-color .15s, color .15s; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="brand" id="home" type="button" aria-label="Quick Recipes home">Quick Recipes</button>
+      <div class="search-wrap">
+        <label class="sr-only" for="search">Search recipes or ingredients</label>
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="search" type="search" placeholder="Search recipes or ingredients" autocomplete="off">
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="browse" aria-labelledby="browse-title">
+      <div class="intro">
+        <h1 id="browse-title" tabindex="-1">Good food. Less fuss.</h1>
+        <p>Find your next favorite, one simple recipe at a time.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter recipes"></div>
+      <p class="results-count" id="results-count" role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty" hidden>
+        <h2 id="empty-title">No recipes match.</h2>
+        <p id="empty-text">Try another search.</p>
+        <button class="action primary" id="reset" type="button">Clear filters and search</button>
+      </div>
+    </section>
+
+    <section class="detail" id="detail" aria-labelledby="detail-title" hidden>
+      <div class="detail-toolbar">
+        <button class="action" id="back" type="button">← Back to recipes</button>
+        <button class="action detail-save" id="detail-save" type="button" aria-pressed="false">
+          <span class="heart" aria-hidden="true"></span>
+          <span id="detail-save-label">Save</span>
+        </button>
+      </div>
+      <div id="detail-image"></div>
+      <h1 id="detail-title" tabindex="-1"></h1>
+      <div class="metadata" id="detail-meta"></div>
+      <div class="recipe-content">
+        <section aria-labelledby="ingredients-heading">
+          <h2 id="ingredients-heading">Ingredients</h2>
+          <ul class="ingredients" id="ingredients"></ul>
+        </section>
+        <section aria-labelledby="steps-heading">
+          <h2 id="steps-heading">Let’s make it</h2>
+          <ol class="steps" id="steps"></ol>
+        </section>
+      </div>
+      <p class="credit" id="credit" hidden></p>
+    </section>
+    <noscript><p>Please enable JavaScript to browse recipes, search ingredients, and save your favorites.</p></noscript>
+  </main>
+
+  <script src="recipes.js"></script>
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = id => document.getElementById(id);
+      const storageKey = "quick-recipes-favs";
+      const dataAvailable = typeof RECIPES !== "undefined" && Array.isArray(RECIPES);
+      const recipes = dataAvailable ? RECIPES : [];
+      const categories = [...new Set(recipes.map(recipe => recipe.category))];
+      const state = { category: null, difficulty: null, favorites: false, query: "" };
+      let favorites = new Set();
+      let activeRecipe = null;
+      let returnId = null;
+      let browseScroll = 0;
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        if (Array.isArray(saved)) favorites = new Set(saved.map(String));
+      } catch (_) {
+        // Favorites remain available for this session if storage is unavailable.
+      }
+
+      function element(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+
+      function isFavorite(recipe) {
+        return favorites.has(String(recipe.id));
+      }
+
+      function toggleFavorite(recipe) {
+        const id = String(recipe.id);
+        if (favorites.has(id)) favorites.delete(id);
+        else favorites.add(id);
+        try {
+          localStorage.setItem(storageKey, JSON.stringify([...favorites]));
+        } catch (_) {}
+        renderGrid();
+        if (activeRecipe) updateDetailSave();
+      }
+
+      function createPhoto(recipe, detail = false) {
+        const wrapper = element("span", detail ? "photo detail-photo" : "photo");
+        const fallback = element("span", "photo-fallback", "Photo unavailable");
+        fallback.hidden = Boolean(recipe.image);
+        wrapper.append(fallback);
+        if (recipe.image) {
+          const image = document.createElement("img");
+          image.alt = detail ? recipe.title : "";
+          image.loading = detail ? "eager" : "lazy";
+          image.decoding = "async";
+          image.addEventListener("error", () => {
+            image.remove();
+            fallback.hidden = false;
+          }, { once: true });
+          image.src = recipe.image;
+          wrapper.append(image);
+        }
+        return wrapper;
+      }
+
+      function createMetadata(recipe) {
+        const metadata = element("span", "metadata");
+        metadata.append(
+          element("span", "", `${recipe.time} min`),
+          element("span", `badge ${recipe.difficulty === "Easy" ? "easy" : "hard"}`, recipe.difficulty)
+        );
+        return metadata;
+      }
+
+      function addChip(label, type, value) {
+        const chip = element("button", "chip", label);
+        chip.type = "button";
+        chip.dataset.filter = type;
+        if (value !== undefined) chip.dataset.value = value;
+        if (type === "category") chip.setAttribute("aria-label", `Category: ${label}`);
+        chip.addEventListener("click", () => {
+          if (type === "all") {
+            state.category = null;
+            state.difficulty = null;
+            state.favorites = false;
+          } else if (type === "favorites") {
+            state.favorites = !state.favorites;
+          } else {
+            state[type] = state[type] === value ? null : value;
+          }
+          updateChips();
+          renderGrid();
+        });
+        $("filters").append(chip);
+      }
+
+      function updateChips() {
+        for (const chip of $("filters").children) {
+          const type = chip.dataset.filter;
+          let pressed;
+          if (type === "all") pressed = state.category === null && state.difficulty === null && !state.favorites;
+          else if (type === "favorites") pressed = state.favorites;
+          else pressed = state[type] === chip.dataset.value;
+          chip.setAttribute("aria-pressed", String(pressed));
+        }
+      }
+
+      function renderGrid() {
+        const query = state.query.trim().toLocaleLowerCase();
+        const matches = recipes.filter(recipe => {
+          const matchesSearch = !query ||
+            recipe.title.toLocaleLowerCase().includes(query) ||
+            recipe.ingredients.some(ingredient => ingredient.toLocaleLowerCase().includes(query));
+          return matchesSearch &&
+            (state.category === null || recipe.category === state.category) &&
+            (state.difficulty === null || recipe.difficulty === state.difficulty) &&
+            (!state.favorites || isFavorite(recipe));
+        });
+
+        const fragment = document.createDocumentFragment();
+        for (const recipe of matches) {
+          const card = element("article", "card");
+          const open = element("button", "card-open");
+          open.type = "button";
+          open.dataset.recipeId = String(recipe.id);
+          open.setAttribute("aria-label", `View ${recipe.title}, ${recipe.time} minutes, ${recipe.difficulty}`);
+          const body = element("span", "card-body");
+          body.append(element("span", "card-title", recipe.title), createMetadata(recipe));
+          open.append(createPhoto(recipe), body);
+          open.addEventListener("click", () => openDetail(recipe));
+
+          const favorite = element("button", "favorite");
+          favorite.type = "button";
+          favorite.dataset.favoriteId = String(recipe.id);
+          favorite.setAttribute("aria-label", `Favorite ${recipe.title}`);
+          favorite.setAttribute("aria-pressed", String(isFavorite(recipe)));
+          const heart = element("span", "heart");
+          heart.setAttribute("aria-hidden", "true");
+          favorite.append(heart);
+          favorite.addEventListener("click", () => {
+            toggleFavorite(recipe);
+            const replacement = [...$("grid").querySelectorAll(".favorite")]
+              .find(button => button.dataset.favoriteId === String(recipe.id));
+            if (replacement) replacement.focus({ preventScroll: true });
+            else {
+              const next = $("grid").querySelector(".favorite");
+              (next || $("filters").querySelector('[data-filter="favorites"]')).focus({ preventScroll: true });
+            }
+          });
+
+          card.append(open, favorite);
+          fragment.append(card);
+        }
+        $("grid").replaceChildren(fragment);
+        $("results-count").textContent = `${matches.length} ${matches.length === 1 ? "recipe" : "recipes"}`;
+        $("empty").hidden = matches.length !== 0;
+
+        if (!recipes.length) {
+          $("empty-title").textContent = dataAvailable ? "Something delicious is on its way." : "Recipes couldn’t be loaded.";
+          $("empty-text").textContent = dataAvailable
+            ? "There are no recipes in this collection yet."
+            : "Make sure recipes.js is available, then reload this page.";
+          $("reset").hidden = true;
+        } else {
+          $("empty-title").textContent = "No recipes match.";
+          $("empty-text").textContent = "Try another search.";
+          $("reset").hidden = false;
+        }
+      }
+
+      function updateDetailSave() {
+        const saved = isFavorite(activeRecipe);
+        $("detail-save").setAttribute("aria-pressed", String(saved));
+        $("detail-save").setAttribute("aria-label", `Favorite ${activeRecipe.title}`);
+        $("detail-save-label").textContent = saved ? "Saved" : "Save";
+      }
+
+      function openDetail(recipe) {
+        browseScroll = window.scrollY;
+        returnId = String(recipe.id);
+        activeRecipe = recipe;
+        $("detail-title").textContent = recipe.title;
+        $("detail-image").replaceChildren(createPhoto(recipe, true));
+        $("detail-meta").replaceChildren(...createMetadata(recipe).childNodes);
+        $("ingredients").replaceChildren(...recipe.ingredients.map(text => element("li", "", text)));
+        $("steps").replaceChildren(...recipe.steps.map(text => element("li", "", text)));
+        const credit = typeof recipe.credit === "string" ? recipe.credit.trim() : "";
+        $("credit").textContent = credit ? `Image credit: ${credit}` : "";
+        $("credit").hidden = !credit;
+        updateDetailSave();
+        $("browse").hidden = true;
+        $("detail").hidden = false;
+        document.title = `${recipe.title} — Quick Recipes`;
+        window.scrollTo({ top: 0, behavior: "instant" });
+        $("detail-title").focus({ preventScroll: true });
+      }
+
+      function showBrowse(restoreFocus = true) {
+        if (!activeRecipe) return;
+        activeRecipe = null;
+        $("detail").hidden = true;
+        $("browse").hidden = false;
+        document.title = "Quick Recipes";
+        window.scrollTo({ top: browseScroll, behavior: "instant" });
+        if (restoreFocus) {
+          const previous = [...$("grid").querySelectorAll(".card-open")]
+            .find(button => button.dataset.recipeId === returnId);
+          (previous || $("browse-title")).focus({ preventScroll: true });
+        }
+      }
+
+      function reset() {
+        state.category = null;
+        state.difficulty = null;
+        state.favorites = false;
+        state.query = "";
+        $("search").value = "";
+        updateChips();
+        renderGrid();
+      }
+
+      addChip("All", "all");
+      categories.forEach(category => addChip(category, "category", category));
+      addChip("Easy", "difficulty", "Easy");
+      addChip("Hard", "difficulty", "Hard");
+      addChip("Favorites", "favorites");
+
+      $("search").addEventListener("input", event => {
+        state.query = event.target.value;
+        showBrowse(false);
+        renderGrid();
+      });
+      $("reset").addEventListener("click", () => {
+        reset();
+        $("search").focus();
+      });
+      $("home").addEventListener("click", () => {
+        showBrowse(false);
+        reset();
+        window.scrollTo({ top: 0, behavior: "instant" });
+        $("browse-title").focus({ preventScroll: true });
+      });
+      $("back").addEventListener("click", () => showBrowse());
+      $("detail-save").addEventListener("click", () => {
+        if (activeRecipe) toggleFavorite(activeRecipe);
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && activeRecipe && event.target !== $("search")) showBrowse();
+      });
+      window.addEventListener("storage", event => {
+        if (event.key !== storageKey && event.key !== null) return;
+        try {
+          const saved = JSON.parse(event.newValue || "[]");
+          favorites = new Set(Array.isArray(saved) ? saved.map(String) : []);
+          renderGrid();
+          if (activeRecipe) updateDetailSave();
+        } catch (_) {}
+      });
+
+      updateChips();
+      renderGrid();
+    })();
+  </script>
+</body>
+</html>
