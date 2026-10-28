@@ -22,8 +22,8 @@ const RECIPES = [
    "Add the eggs and stir gently until fully set.",
    "Toss in the pasta, vegetables, Parmesan, salt, and pepper until warmed through."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Angel_hair_pasta%2C_anchovies%2C_pesto%2C_olive_oil%2C_black_pepper_-_Maasachusetts.jpg/960px-Angel_hair_pasta%2C_anchovies%2C_pesto%2C_olive_oil%2C_black_pepper_-_Maasachusetts.jpg",
-  "credit": "Photo: Daderot / Wikimedia Commons (CC0)"
+  "image": "images/egg-veggie-angel-hair.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "bang-bang-chicken-rice-bowls",
@@ -153,8 +153,8 @@ const RECIPES = [
    "Add the noodles, soy sauce, and sesame oil and toss for 2 minutes.",
    "Scatter the scallions over the noodles and serve."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Soy_Milk_Ramen_and_Tonkotsu_Miso_Ramen_by_Goemon_Ramen_Bar.jpg/960px-Soy_Milk_Ramen_and_Tonkotsu_Miso_Ramen_by_Goemon_Ramen_Bar.jpg",
-  "credit": "Photo: Andy Li / Wikimedia Commons (CC0)"
+  "image": "images/ramen-veggie-egg-stir-fry.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "pudina-paneer",
@@ -179,8 +179,8 @@ const RECIPES = [
    "Lower the heat and add the mint sauce.",
    "Stir gently for 2 to 3 minutes until hot without letting the sauce boil."
   ],
-  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Malai_Paneer_Tikka%2C_PK_007.jpg",
-  "credit": "Photo: PallaviKhale / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/pudina-paneer.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "sweet-chilli-salmon-fried-rice",
@@ -205,8 +205,8 @@ const RECIPES = [
    "Add the rice, sweet chilli sauce, and soy sauce and stir-fry for 3 minutes.",
    "Gently fold in the salmon and cook until everything is steaming hot, then add the scallions."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Fried_rice_and_chicken.png/960px-Fried_rice_and_chicken.png",
-  "credit": "Photo: Edithobayaa1 / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/sweet-chilli-salmon-fried-rice.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "spaghetti-aglio-e-olio",
@@ -285,8 +285,8 @@ const RECIPES = [
    "Add the vegetables, garlic, and ginger and stir-fry for 4 minutes.",
    "Stir the sauce again, pour it into the skillet, and cook for 2 minutes until thickened and the chicken reaches 165\u00b0F."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Chicken_fried_rice_-_Stir_Fry_by_CK_2023-12-02.jpg/960px-Chicken_fried_rice_-_Stir_Fry_by_CK_2023-12-02.jpg",
-  "credit": "Photo: Andy Li / Wikimedia Commons (CC0)"
+  "image": "images/chicken-stir-fry.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "caprese-salad",
@@ -413,8 +413,8 @@ const RECIPES = [
    "Add the chicken and cook for 6 to 8 minutes, breaking up the clumps, until it reaches 165\u00b0F.",
    "Stir in the sauce and simmer for 1 minute, then fold in the basil just until wilted."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Thai_Green_Curry%2CJasminRice%2CChilli_Basil_Chicken_%2C_HomeMade.jpg/960px-Thai_Green_Curry%2CJasminRice%2CChilli_Basil_Chicken_%2C_HomeMade.jpg",
-  "credit": "Photo: PallaviKhale / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/thai-basil-chicken.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "veggie-quesadillas",
@@ -521,8 +521,8 @@ const RECIPES = [
    "Top the chicken with mozzarella, cover, and cook for 2 to 3 minutes, until the cheese softens and the chicken reaches 165\u00b0F.",
    "Scatter over the basil and drizzle with balsamic glaze."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Caprese_-_toastable_2024-11-27.jpg/960px-Caprese_-_toastable_2024-11-27.jpg",
-  "credit": "Photo: Andy Li / Wikimedia Commons (CC0)"
+  "image": "images/caprese-chicken-skillet.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "lemon-garlic-shrimp",
@@ -599,8 +599,8 @@ const RECIPES = [
    "Spread each pita with tzatziki and add the cucumber, tomato, and chicken.",
    "Sprinkle with feta and fold the pitas around the filling."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Butter_Chicken%2C_rice%2C_pita%2C_cookie%2C_and_glass_of_water.jpg/960px-Butter_Chicken%2C_rice%2C_pita%2C_cookie%2C_and_glass_of_water.jpg",
-  "credit": "Photo: TechnoKittyCat / Wikimedia Commons (CC0)"
+  "image": "images/greek-chicken-pita.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "garlic-butter-steak-bites",
@@ -624,8 +624,8 @@ const RECIPES = [
    "Reduce the heat to low, add the butter and garlic, and toss for 30 seconds.",
    "Transfer to a plate, spoon over the garlic butter, and rest for 3 minutes before adding parsley."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Grilled_mixed_steak_in_close_up.jpg/960px-Grilled_mixed_steak_in_close_up.jpg",
-  "credit": "Photo: Geoffreyrabbit / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/garlic-butter-steak-bites.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "honey-butter-fried-chicken",
@@ -706,8 +706,8 @@ const RECIPES = [
    "Add the beans, tomatoes with their juices, and salt. Simmer for 8 minutes, stirring occasionally.",
    "Fold in the spinach and cook for 2 minutes, until wilted."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Big_White_Beans_2.jpg/960px-Big_White_Beans_2.jpg",
-  "credit": "Photo: Wilhelmmarvel / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/white-beans-tomato-sausage.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "creamy-vegetarian-enchilada-pasta",
@@ -732,8 +732,8 @@ const RECIPES = [
    "Stir the cream cheese into the sauce until smooth, then add the pasta and enough reserved water to loosen the sauce.",
    "Sprinkle with cheddar, cover for 1 minute to melt, and finish with cilantro."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Vegetarian_Mexican_enchiladas_with_green_salsa_cheese_sour_cream_and_avocado_20260823_162514_%285%29.jpg/960px-Vegetarian_Mexican_enchiladas_with_green_salsa_cheese_sour_cream_and_avocado_20260823_162514_%285%29.jpg",
-  "credit": "Photo: Gerardolagunes / Wikimedia Commons (CC0)"
+  "image": "images/creamy-enchilada-pasta.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "sausage-and-kale-skillet",
@@ -758,8 +758,8 @@ const RECIPES = [
    "Add the kale and broth, working in batches if needed. Cover and cook over medium heat for 5 minutes.",
    "Uncover and cook for 2 minutes to reduce the liquid, then stir in the lemon juice."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Ravioli_Soup_with_Sausage_and_Kale-1_%2832420624362%29.jpg/960px-Ravioli_Soup_with_Sausage_and_Kale-1_%2832420624362%29.jpg",
-  "credit": "Photo: Sharon Chen from Austin, United States / Wikimedia Commons (CC BY 2.0)"
+  "image": "images/sausage-kale-skillet.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "roasted-corn-and-zucchini-tacos",
@@ -785,8 +785,8 @@ const RECIPES = [
    "Warm the tortillas in a dry skillet over medium heat for about 20 seconds per side.",
    "Fill the tortillas with vegetables, avocado, and cotija. Serve with lime wedges."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Birria_tacos_at_Teddy%27s_Red_Tacos_in_Venice%2C_California.jpg/960px-Birria_tacos_at_Teddy%27s_Red_Tacos_in_Venice%2C_California.jpg",
-  "credit": "Photo: T.Tseng / Wikimedia Commons (CC BY 2.0)"
+  "image": "images/corn-zucchini-tacos.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "cheesy-gnocchi-skillet",
@@ -812,8 +812,8 @@ const RECIPES = [
    "Fold in the spinach and cook uncovered for 2 minutes.",
    "Scatter the mozzarella and Parmesan over the top. Cover and cook on low for 3 minutes, until melted."
   ],
-  "image": "https://upload.wikimedia.org/wikipedia/commons/8/81/Don_Gnocchi_mutilatini.jpg",
-  "credit": "Photo: Unknown authorUnknown author / Wikimedia Commons (Public domain)"
+  "image": "images/cheesy-gnocchi-skillet.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "sesame-glazed-salmon-and-green-beans",
@@ -918,8 +918,8 @@ const RECIPES = [
    "Add the drained pasta and cheddar. Stir over low heat until the cheese melts.",
    "Remove from the heat and fold in the sour cream."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Making_Pasta_%28Unsplash%29.jpg/960px-Making_Pasta_%28Unsplash%29.jpg",
-  "credit": "Photo: Jorge Zapata jorgezapatag / Wikimedia Commons (CC0)"
+  "image": "images/taco-pasta.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "creamy-tomato-and-spinach-pasta",
@@ -998,8 +998,8 @@ const RECIPES = [
    "Add the garlic and paprika and cook for 2 minutes, stirring gently.",
    "Remove from the heat and finish with lemon juice and feta."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Liat_Portal_for_Foodie_Disorder_-_Saut%C3%A9ed_Green_Beans_with_Onions.jpg/960px-Liat_Portal_for_Foodie_Disorder_-_Saut%C3%A9ed_Green_Beans_with_Onions.jpg",
-  "credit": "Photo: HaJunkiyada / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/potato-green-bean-skillet.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "beef-and-tomato-rice-bowl",
@@ -1187,8 +1187,8 @@ const RECIPES = [
    "Flip, add cheese, and cook for 1 to 2 minutes to crisp the tortillas; repeat with the remaining tacos.",
    "Top with lettuce, pickles, and sauce, then fold gently to eat."
   ],
-  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/C_N_Cheese_burger_and_%22smash_browns%22_at_BurgerFuel_%28Courtenay_Place%29.jpg/960px-C_N_Cheese_burger_and_%22smash_browns%22_at_BurgerFuel_%28Courtenay_Place%29.jpg",
-  "credit": "Photo: Fourthords / Wikimedia Commons (CC BY-SA 4.0)"
+  "image": "images/smash-burger-tacos.jpg",
+  "credit": "Generated image (Sunburst)"
  },
  {
   "id": "french-omelette",
